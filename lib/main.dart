@@ -3,6 +3,7 @@
 import 'package:bloc_auth_sample/auth_bloc/bloc/auth_bloc.dart';
 import 'package:bloc_auth_sample/auth_bloc/bloc/auth_state.dart';
 import 'package:bloc_auth_sample/pages/home_page.dart';
+import 'package:bloc_auth_sample/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,25 +19,25 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc(),
       child: MaterialApp(
-          title: "Flutter Login",
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
-            useMaterial3: true,
-          ),
-          home: BlocBuilder<AuthBloc, AuthState>(
-            builder: (context, state) {
-              if (state is AuthLoading) {
-                return const Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
-              if (state is AuthSuccess) {
-                return const HomePage();
-              }
-            }),
-          ),
+        title: "Flutter Login",
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+          useMaterial3: true,
+        ),
+        home: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            if (state is AuthLoading) {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+            if (state is AuthSuccess) {
+              return const HomePage();
+            }
+            return const LoginPage();
+          },
         ),
       ),
     );
